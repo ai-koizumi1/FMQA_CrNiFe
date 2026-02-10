@@ -1,0 +1,6 @@
+Generating k points Automatically
+0                !automatic generation
+Monkhorst-Pack   !scheme
+ 4 4 4       !grid along b1,b2,b3.
+   0. 0. 0.      !shift of the mesh
+

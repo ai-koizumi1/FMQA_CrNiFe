@@ -1,0 +1,25 @@
+ SYSTEM = FeCrNi
+
+ Start parameter for this Run:
+   ISTART =   0
+   ISPIN  =   2
+   MAGMOM = 3*-3  200*3
+   KPAR  =    2
+   LREAL  =.TRUE.
+   AMIN   = 0.01
+   ENCUT  =  350
+ Electronic Relaxation 1
+   ISMEAR =    1
+   SIGMA  =  0.1
+   NELMIN =     2
+   NELM   =    100
+   EDIFF  =   1E-04   stopping-criterion for ELM
+Ionic Relaxation 1
+   NSW    =   0
+   IBRION =     2
+   EDIFFG =   1E-03   stopping-criterion for ELM
+   ISIF   =    2
+ DOS related values:
+   LORBIT =  10
+   NEDOS  = 2001
+
