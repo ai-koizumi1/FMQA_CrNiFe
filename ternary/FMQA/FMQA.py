@@ -73,9 +73,9 @@ for iloop in range(N_iterations):
     elif 2<len(atom_num):
         gs=[]
         for i in range(len(atom_num)):
-            gs.append( alpha * equal_to(sum([q[k * atom_type + i] for k in range(sum(atom_num))]), atom_num[i]) )
+            gs.append( alpha * equal_to(sum([q[k * atom_type + i] for k in range(tot_atom_num)]), atom_num[i]) )
         g=sum(gs) #constraint on the number of each atom
-        h = alpha * sum(one_hot(q[k * atom_type:(k + 1) * atom_type]) for k in range(sum(atom_num))) #one-hot constraint
+        h = alpha * sum(one_hot(q[k * atom_type:(k + 1) * atom_type]) for k in range(tot_atom_num)) #one-hot constraint
         constraint=g+h
     
     if mode == "FMQA":
@@ -94,8 +94,7 @@ for iloop in range(N_iterations):
         new_x = np.array(new_x_int)
     else: # random
         samplingmethod.append([iloop,1])
-        m = constraint
-        amplify_model = amplify.BinaryQuadraticModel(m)
+        amplify_model = amplify.BinaryQuadraticModel(constraint)
         result = solver.solve(amplify_model)
         new_x = q.decode(result[0].values)
         new_x_int = [int(i) for i in new_x]
@@ -103,8 +102,7 @@ for iloop in range(N_iterations):
 
     while contains(X, new_x):
         samplingmethod.append([iloop,2])
-        m = constraint
-        amplify_model = amplify.BinaryQuadraticModel(m)
+        amplify_model = amplify.BinaryQuadraticModel(constraint)
         result = solver.solve(amplify_model)
         new_x = q.decode(result[0].values)
         new_x_int = [int(i) for i in new_x]
